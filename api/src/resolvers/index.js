@@ -1,9 +1,9 @@
+const { GraphQLDateTime } = require('graphql-iso-date');
 const Query = require('./query');
 const Mutation = require('./mutation');
-const { GraphQLDateTime } = require('graphql-iso-date');
 
 module.exports = {
-  Query,
+  DateTime: GraphQLDateTime,
   Mutation,
-  DateTime: GraphQLDateTime
+  Query,
 };

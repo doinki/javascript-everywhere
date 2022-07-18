@@ -1,10 +1,4 @@
 module.exports = {
-  newNote: async (_, args, { models }) => {
-    return await models.Note.create({
-      content: args.content,
-      author: 'Adam Scott'
-    });
-  },
   deleteNote: async (_, { id }, { models }) => {
     try {
       await models.Note.findOneAndRemove({ _id: id });
@@ -13,11 +7,19 @@ module.exports = {
       return false;
     }
   },
-  updateNote: async (_, { id, content }, { models }) => {
-    return await models.Note.findOneAndUpdate(
+  newNote: async (_, args, { models }) => {
+    const newNote = await models.Note.create({
+      author: 'Adam Scott',
+      content: args.content,
+    });
+    return newNote;
+  },
+  updateNote: async (_, { content, id }, { models }) => {
+    const updatedNote = await models.Note.findOneAndUpdate(
       { _id: id },
       { $set: { content } },
       { new: true }
     );
-  }
+    return updatedNote;
+  },
 };
